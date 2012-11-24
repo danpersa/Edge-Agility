@@ -4,7 +4,11 @@ EdgeAgility::Application.routes.draw do
 
   resources :user_stories
   resources :iterations
-  resources :projects
+  resources :projects do
+    member do
+      get :set_as_current
+    end
+  end
   resources :technical_stories
   resources :scenarios
   resources :prototypes

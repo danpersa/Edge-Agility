@@ -1,6 +1,6 @@
 EdgeAgility.UserStoriesView = Ember.View.extend({
   templateName:    'user_stories/list'
-  userStoriesBinding: 'EdgeAgility.UserStoriesController'
+  userStoriesBinding: 'EdgeAgility.userStoriesController.content'
 
   showNew: ->
     this.set('isNewVisible', true)

@@ -1,0 +1,13 @@
+{{#with content}}
+<div class="row">
+  <div class="two columns">
+    {{view EdgeAgility.NewIterationButtonView}}
+  </div>
+  <div class="nine columns">
+    {{view Ember.TextField valueBinding="summary" id="summary" placeholder="User Story Summary" required="true"}}
+  </div>
+  <div class="one columns">
+    {{submitButton "Create"}}
+  </div>
+</div>
+{{/with}}

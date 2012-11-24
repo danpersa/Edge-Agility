@@ -31,4 +31,8 @@ EdgeAgility.BacklogView = Ember.View.extend({
         EdgeAgility.store.commit()
           
 
-});
+})
+
+EdgeAgility.NewIterationButtonView = Ember.View.extend({
+  templateName: 'backlog/new_iteration_button'
+})

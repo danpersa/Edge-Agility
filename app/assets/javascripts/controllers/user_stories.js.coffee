@@ -30,7 +30,7 @@ EdgeAgility.NewUserStoryController = Ember.Controller.extend({
       this.get('content').addObserver('id', this, 'showRecord')
   showRecord: ->
     EdgeAgility.router.transitionTo('userStories.index', this.get('content'))
-}) 
+})
 
 EdgeAgility.EditUserStoryController = Ember.Controller.extend({
   content: null

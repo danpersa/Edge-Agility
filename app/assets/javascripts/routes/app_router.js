@@ -18,13 +18,44 @@ EdgeAgility.Router = Ember.Router.extend({
       enter: function (router) {
         console.log("The backlog sub-state was entered.");
       },
+      showNewIteration: function(router) {
+        router.transitionTo('backlog.newIteration', {});
+      },
       connectOutlets: function(router, context) {
         router.get('applicationController').connectOutlet({
           viewClass: EdgeAgility.BacklogView,
           controller: router.get('backlogController'),
           context: EdgeAgility.store.findAll(EdgeAgility.Iteration)
         });
-      }
+      },
+      index: Ember.Route.extend({
+        route: '/',
+        enter: function (router) {
+          console.log("The backlog index sub-state was entered.");
+        },
+        connectOutlets: function(router, context) {
+          router.get('backlogController').connectOutlet({
+            outletName: 'quickBar',
+            viewClass: EdgeAgility.QuickUserStoryView,
+            controller: router.get('quickUserStoryController')
+          });
+          router.get('quickUserStoryController').enterNew();
+        }
+      }),
+      newIteration: Ember.Route.extend({
+        route: '/new-iteration',
+        cancelNewIteration: function(router) {
+          router.transitionTo('backlog.index');
+        },
+        connectOutlets: function(router, context) {
+          router.get('backlogController').connectOutlet({
+            outletName: 'newIteration',
+            viewClass: EdgeAgility.NewIterationView,
+            controller: router.get('newIterationController')
+          });
+          router.get('newIterationController').enterNew();
+        }
+      })
     }),
     userStories:  Ember.Route.extend({
       route: '/user_stories',

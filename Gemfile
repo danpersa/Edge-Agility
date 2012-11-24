@@ -7,6 +7,9 @@ gem 'rabl'
 
 gem 'compass-rails'
 gem 'zurb-foundation'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

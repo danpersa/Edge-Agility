@@ -1,0 +1,19 @@
+{{#with content}}
+<div class="row">
+  <div class="three columns">
+    {{view Ember.TextField valueBinding="name" id="name" placeholder="Name" required="true"}}
+  </div>
+  <div class="three columns">
+    {{view Ember.TextField valueBinding="start_date" id="start_date" placeholder="Start Date (mm/dd/yyyy)" required="true"}}
+  </div>
+  <div class="three columns">
+    {{view Ember.TextField valueBinding="end_date" id="end_date" placeholder="End Date (mm/dd/yyyy)" required="true"}}
+  </div>
+  <div class="one columns">
+    {{submitButton "Create"}}
+  </div>
+  <div class="one columns">
+    <a class="secondary button" {{action cancelNewIteration}}>Cancel</a>
+  </div>
+</div>
+{{/with}}

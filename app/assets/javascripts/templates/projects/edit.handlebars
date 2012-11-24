@@ -1,0 +1,20 @@
+{{#with content}}
+  <fieldset>
+      <legend>Edit Project</legend>
+        <div class="row collapse">
+        <div class="two columns"><label class="inline">Code</label></div>
+        <div class="ten columns">{{view Ember.TextField valueBinding="code" id="code" placeholder="Code" required="true"}}</div>
+      </div>
+      <div class="row collapse">
+        <div class="two columns"><label class="inline">Name</label></div>
+        <div class="ten columns">{{view Ember.TextField valueBinding="name" id="name" placeholder="Name" required="true"}}</div>
+      </div>
+
+      <label>Description</label>
+      {{view Ember.TextArea valueBinding="description" id="description" placeholder="Description"}}
+  </fieldset>
+  <div class="row collapse">
+    {{submitButton "Update"}}
+    <a class="secondary button" {{action cancelEdit}}>Cancel</a>
+  </div>
+{{/with}}

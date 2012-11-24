@@ -10,6 +10,9 @@ EdgeAgility.Router = Ember.Router.extend({
           EdgeAgility.router.get('projectsMenuController').selectProject(event.context.get('id'));
         });
       },
+      showEditProject: function(router, event) {
+        router.transitionTo('projects.edit', event.context);
+      },
       // You'll likely want to connect a view here.
       connectOutlets: function(router) {
         router.get('applicationController').connectOutlet({
@@ -47,6 +50,10 @@ EdgeAgility.Router = Ember.Router.extend({
         });
         router.get('projectsMenuController').findAll();
         router.get('loginMenuController').enter();
+        router.get('applicationController').connectOutlet({
+          viewClass: EdgeAgility.ProjectsView,
+          controller: router.get('projectsMenuController')
+        });
       }
 
       // Layout your routes here...
@@ -92,6 +99,23 @@ EdgeAgility.Router = Ember.Router.extend({
             controller: router.get('newIterationController')
           });
           router.get('newIterationController').enterNew();
+        }
+      })
+    }),
+    projects: Ember.Route.extend({
+      route: '/projects',
+      edit: Ember.Route.extend({
+        route: '/:project_id/edit',
+        cancelEdit: function(router) {
+          router.transitionTo('root.index');
+        },
+        connectOutlets: function(router, context) {
+          var projectsController = router.get('projectsMenuController');
+          projectsController.connectOutlet('editProject', context);
+          router.get('editProjectController').enterEdit();       
+        },
+        exit: function(router) {
+          router.get('editProjectController').exitEdit();
         }
       })
     }),

@@ -6,44 +6,20 @@
 
   <section>
     <ul class="left">
-      <li><a href="#">Backlog</a></li>
-      <li><a href="#">Scrum Board</a></li>
-      <ul class="right">
-        <li class="has-dropdown">
-          <a href="#">This Project</a>
-
-          <ul class="dropdown">
-            <li><a href="#">Project Settings</a></li>
-            <li><a href="#">User Management</a></li>            
-          </ul>
-        </li>
-      </ul>
+     <li>{{outlet backlogMenu}}</li>
+     <li>{{outlet scrumBoardMenu}}</li>
     </ul>
+     
+    {{outlet projectMenu}}
+
 
 
     {{outlet loginMenu}}
-
-
-    <ul class="right">
-      <li class="has-dropdown">
-        <a href="#">All Projects</a>
-
-        <ul class="dropdown">
-          <li><a href="#">Project 1</a></li>                            
-          <li><a href="#">Project 2</a></li>  
-          <li class="divider"></li>                 
-          <li><a href="#">New Project</a></li>                   
-        </ul>
-      </li>
-    </ul>
-
+    {{outlet projectsMenu}}
   </section>
 </nav><br/><br/><br/><br/>
 
-
-
-
- <div class="row">
+<div class="row">
     {{outlet}}
 
     <!-- Contact Details -->

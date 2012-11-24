@@ -9,11 +9,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = user.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def destroy
-    @user = user.find(params[:id])
+    @user = User.find(params[:id])
     @user.destroy
     respond_to do |format|
       format.json { render json: nil, status: :ok }

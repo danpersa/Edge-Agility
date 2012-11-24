@@ -1,10 +1,16 @@
-<ul class="right">
-  <li class="has-dropdown">
-    <a href="#">Username</a>
-
-    <ul class="dropdown">
-      <li><a href="#">Logout</a></li>          
-      <li><a href="/auth/github">Sign In</a></li>
-    </ul>
-  </li>
-</ul>
+{{#if content}}
+  {{#with content}}
+  <ul class="right">
+    <li class="has-dropdown">
+      <a href="#">Welcome {{name}}</a>
+      <ul class="dropdown">
+        <li><a href="/signout">Sign Out</a></li>          
+      </ul>
+    </li>
+  </ul>
+  {{/with}}
+{{else}}
+  <ul class="right">
+    <li class="right"><a href="/auth/github">Sign In</a></li>
+  </ul>
+{{/if}}

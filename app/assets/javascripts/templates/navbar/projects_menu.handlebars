@@ -1,0 +1,15 @@
+{{#if visible}}
+    <ul class="right">
+      <li class="has-dropdown">
+        <a href="#">All Projects</a>
+
+        <ul class="dropdown">
+          {{#each project in content}}
+          <li><a {{action selectProject project}}>{{project.name}}</a></li> 
+          {{/each}} 
+          <li class="divider"></li>                 
+          <li><a href="#">New Project</a></li>                   
+        </ul>
+      </li>
+    </ul>
+{{/if}}

@@ -5,7 +5,11 @@ EdgeAgility.Router = Ember.Router.extend({
   root: Ember.Route.extend({
     index: Ember.Route.extend({
       route: '/',
-
+      selectProject: function(router, event) {
+        $.get('/projects/' + event.context.get('id') + '/set_as_current', function(data) {
+          EdgeAgility.router.get('projectsMenuController').selectProject(event.context.get('id'));
+        });
+      },
       // You'll likely want to connect a view here.
       connectOutlets: function(router) {
         router.get('applicationController').connectOutlet({
@@ -13,6 +17,35 @@ EdgeAgility.Router = Ember.Router.extend({
           viewClass: EdgeAgility.LoginMenuView,
           controller: router.get('loginMenuController')
         });
+        router.get('loginMenuController').addObserver('content', function() {
+          if (router.get('loginMenuController').get('content') != null) {
+            router.get('projectsMenuController').set('visible', true);
+          } else {
+            router.get('projectsMenuController').set('visible', false);
+          }
+        });
+        router.get('loginMenuController').enter();
+        router.get('applicationController').connectOutlet({
+          outletName: 'projectsMenu',
+          viewClass: EdgeAgility.ProjectsMenuView,
+          controller: router.get('projectsMenuController')
+        });
+        router.get('applicationController').connectOutlet({
+          outletName: 'projectMenu',
+          viewClass: EdgeAgility.ProjectMenuView,
+          controller: router.get('projectMenuController')
+        });
+        router.get('applicationController').connectOutlet({
+          outletName: 'scrumBoardMenu',
+          viewClass: EdgeAgility.ScrumBoardMenuView,
+          controller: router.get('scrumBoardMenuController')
+        });
+        router.get('applicationController').connectOutlet({
+          outletName: 'backlogMenu',
+          viewClass: EdgeAgility.BacklogMenuView,
+          controller: router.get('backlogMenuController')
+        });
+        router.get('projectsMenuController').findAll();
         router.get('loginMenuController').enter();
       }
 

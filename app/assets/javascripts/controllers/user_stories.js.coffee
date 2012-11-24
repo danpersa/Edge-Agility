@@ -25,8 +25,8 @@ EdgeAgility.NewUserStoryController = Ember.Controller.extend({
       EdgeAgility.displayError validationErrors
     else
       # commit and then clear the transaction (so exitEditing doesn't attempt a rollback)
-      this.transaction.commit();
-      this.transaction = null;
+      this.transaction.commit()
+      this.transaction = null
       this.get('content').addObserver('id', this, 'showRecord')
   showRecord: ->
     EdgeAgility.router.transitionTo('userStories.index', this.get('content'))

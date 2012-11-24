@@ -9,3 +9,7 @@ child :technical_stories do
   attributes :_id => :id
   attributes :code, :status, :summary, :details
 end
+child :scenarios do
+  attributes :_id => :id
+  attributes :summary, :details
+end

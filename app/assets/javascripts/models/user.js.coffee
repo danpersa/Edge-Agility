@@ -1,4 +1,5 @@
 EdgeAgility.User = DS.Model.extend(
-  username: DS.attr("string")
-  password: DS.attr("string")
+  primaryKey: 'id'
+  id: DS.attr("string")
+  name: DS.attr("string")
 )

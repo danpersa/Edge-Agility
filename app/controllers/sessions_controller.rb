@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  respond_to :json, :html
+
   def create
     # raise env["omniauth.auth"].to_yaml
     user = User.from_omniauth(env["omniauth.auth"])

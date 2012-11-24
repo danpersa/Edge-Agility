@@ -4,12 +4,17 @@ EdgeAgility.Router = Ember.Router.extend({
 
   root: Ember.Route.extend({
     index: Ember.Route.extend({
-      route: '/'
+      route: '/',
 
       // You'll likely want to connect a view here.
-      // connectOutlets: function(router) {
-      //   router.get('applicationController').connectOutlet(App.MainView);
-      // }
+      connectOutlets: function(router) {
+        router.get('applicationController').connectOutlet({
+          outletName: 'loginMenu',
+          viewClass: EdgeAgility.LoginMenuView,
+          controller: router.get('loginMenuController')
+        });
+        router.get('loginMenuController').enter();
+      }
 
       // Layout your routes here...
     }),

@@ -1,2 +1,2 @@
 object @user_story
-extends "user_stories/show"
+extends "user_stories/item"

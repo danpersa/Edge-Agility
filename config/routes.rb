@@ -6,6 +6,7 @@ EdgeAgility::Application.routes.draw do
   resources :iterations
   resources :projects
   resources :technical_stories
+  resources :scenarios
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

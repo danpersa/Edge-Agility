@@ -62,12 +62,13 @@ def make_user_stories iteration
                       :status => 0,                      
                       :iteration_id => iteration.id
     make_technical_stories user_story
+    make_scenarios user_story
   end
   puts
 end
 
 def make_technical_stories user_story
-  debug "make user stories: "
+  debug "make technical stories: "
   4.times do |n|
     print "."
     TechnicalStory.create! :summary => "System supports #{n + 1} types of logging",
@@ -75,6 +76,17 @@ def make_technical_stories user_story
                       :points => n,
                       :code => "TS-#{user_story.iteration.project.code}-#{n+1}",                     
                       :status => 0,                      
+                      :user_story_id => user_story.id
+  end
+  puts
+end
+
+def make_scenarios user_story
+  debug "make scenarios: "
+  4.times do |n|
+    print "."
+    Scenario.create! :summary => "Scenario #{n}",
+                      :details => "First you need to do this and that",                        
                       :user_story_id => user_story.id
   end
   puts

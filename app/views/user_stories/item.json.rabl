@@ -13,3 +13,7 @@ child :scenarios do
   attributes :_id => :id
   attributes :summary, :details
 end
+child :prototypes do
+  attributes :_id => :id
+  attributes :title, :file_name
+end

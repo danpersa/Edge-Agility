@@ -10,6 +10,7 @@ class UserStory
 
   has_many :scenarios
   has_many :technical_stories
+  has_many :prototypes
   belongs_to :iteration
 
   validates_presence_of       :summary

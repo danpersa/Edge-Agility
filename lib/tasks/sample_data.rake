@@ -63,6 +63,7 @@ def make_user_stories iteration
                       :iteration_id => iteration.id
     make_technical_stories user_story
     make_scenarios user_story
+    make_prototypes user_story
   end
   puts
 end
@@ -87,6 +88,17 @@ def make_scenarios user_story
     print "."
     Scenario.create! :summary => "Scenario #{n}",
                       :details => "First you need to do this and that",                        
+                      :user_story_id => user_story.id
+  end
+  puts
+end
+
+def make_prototypes user_story
+  debug "make prototypes: "
+  4.times do |n|
+    print "."
+    Prototype.create! :title => "Prototype #{n}",
+                      :file_name => "/path/prototype.jpg",                        
                       :user_story_id => user_story.id
   end
   puts

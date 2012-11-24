@@ -4,6 +4,10 @@ EdgeAgility::Application.routes.draw do
 
   resources :user_stories
   resources :iterations
+  resources :projects
+  resources :technical_stories
+  resources :scenarios
+  resources :prototypes
 
 
   match 'auth/:provider/callback', to: 'sessions#create'

@@ -11,7 +11,7 @@ namespace :db do
     Mongoid.purge!
     beginning_time = Time.now
 
-    make_iterations_with_user_stories
+    make_projects
         
     end_time = Time.now
     debug "Time elapsed #{(end_time - beginning_time)} seconds"
@@ -25,13 +25,26 @@ def debug message
   Rails.logger.info message
 end
 
-def make_iterations_with_user_stories
+def make_projects
+  debug "maje_projects"
+  3.times do |n|
+    print "."
+    project = Project.create! :name => "Project #{n + 1}",
+                              :description => "Making an agile board",
+                              :code => "PR #{n}",
+                              :user_story_seq => 1
+    make_iterations_with_user_stories project
+  end
+end
+
+def make_iterations_with_user_stories project
   debug "make iterations: "
   3.times do |n|
     print "."
     iteration = Iteration.create! :name => "Iteration #{n + 1}",
                       :start_date => Date.new,
-                      :end_date => Date.new
+                      :end_date => Date.new,
+                      :project_id => project.id
     make_user_stories iteration
   end
 end
@@ -40,11 +53,53 @@ def make_user_stories iteration
   debug "make user stories: "
   4.times do |n|
     print "."
-    UserStory.create! :summary => "User does #{n + 1} push-ups",
+    user_story = UserStory.create! :summary => "User does #{n + 1} push-ups",
                       :details => "As an User I want to do #{n + 1} push-ups " +
                                   "so I can have more muscles",
+                      :points => n,
+                      :code => "US-#{iteration.project.code}-#{n+1}",
                       :order => 3 - n,
+                      :status => 0,                      
                       :iteration_id => iteration.id
+    make_technical_stories user_story
+    make_scenarios user_story
+    make_prototypes user_story
+  end
+  puts
+end
+
+def make_technical_stories user_story
+  debug "make technical stories: "
+  4.times do |n|
+    print "."
+    TechnicalStory.create! :summary => "System supports #{n + 1} types of logging",
+                      :details => "Method to do exception handling",
+                      :points => n,
+                      :code => "TS-#{user_story.iteration.project.code}-#{n+1}",                     
+                      :status => 0,                      
+                      :user_story_id => user_story.id
+  end
+  puts
+end
+
+def make_scenarios user_story
+  debug "make scenarios: "
+  4.times do |n|
+    print "."
+    Scenario.create! :summary => "Scenario #{n}",
+                      :details => "First you need to do this and that",                        
+                      :user_story_id => user_story.id
+  end
+  puts
+end
+
+def make_prototypes user_story
+  debug "make prototypes: "
+  4.times do |n|
+    print "."
+    Prototype.create! :title => "Prototype #{n}",
+                      :file_name => "/path/prototype.jpg",                        
+                      :user_story_id => user_story.id
   end
   puts
 end

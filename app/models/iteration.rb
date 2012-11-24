@@ -6,4 +6,5 @@ class Iteration
   field :end_date, :type => Date
 
   has_many :user_stories
+  belongs_to :project
 end

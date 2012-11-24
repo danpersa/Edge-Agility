@@ -1,6 +1,7 @@
 EdgeAgility::Application.routes.draw do
   root :to => 'sample#index'
   match '/signup',                      :to => 'sample#index'
+  match '/forms',                       :to => 'sample#forms'
 
   resources :user_stories
   resources :iterations

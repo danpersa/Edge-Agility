@@ -11,7 +11,7 @@ namespace :db do
     Mongoid.purge!
     beginning_time = Time.now
 
-    make_iterations_with_user_stories
+    make_projects
         
     end_time = Time.now
     debug "Time elapsed #{(end_time - beginning_time)} seconds"
@@ -25,13 +25,24 @@ def debug message
   Rails.logger.info message
 end
 
-def make_iterations_with_user_stories
+def make_projects
+  debug "maje_projects"
+  3.times do |n|
+    print "."
+    project = Project.create! :name => "Project #{n + 1}",
+                              :description => "Making an agile board"
+    make_iterations_with_user_stories project
+  end
+end
+
+def make_iterations_with_user_stories project
   debug "make iterations: "
   3.times do |n|
     print "."
     iteration = Iteration.create! :name => "Iteration #{n + 1}",
                       :start_date => Date.new,
-                      :end_date => Date.new
+                      :end_date => Date.new,
+                      :project_id => project.id
     make_user_stories iteration
   end
 end

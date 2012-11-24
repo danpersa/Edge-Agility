@@ -5,15 +5,21 @@ EdgeAgility::Application.routes.draw do
 
   resources :user_stories
   resources :iterations
-  resources :projects
+  resources :projects do
+    member do
+      get :set_as_current
+    end
+  end
   resources :technical_stories
   resources :scenarios
   resources :prototypes
+  resources :users, only: [:index, :show]
 
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
+  match 'current_user', to: 'users#show_current_user'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

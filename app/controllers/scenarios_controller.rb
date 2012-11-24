@@ -1,4 +1,6 @@
 class ScenariosController < ApplicationController
+  before_filter :authenticate
+  
   respond_to :json, :html
 
   def index

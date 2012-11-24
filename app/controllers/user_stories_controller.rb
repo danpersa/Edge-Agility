@@ -1,9 +1,10 @@
 class UserStoriesController < ApplicationController
+  before_filter :authenticate
 
   respond_to :json, :html
 
   def index
-    @user_stories = UserStory.all
+    @user_stories = current_project.user_stories
     respond_with @user_stories, :handler => [:rabl]
   end
 

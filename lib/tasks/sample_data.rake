@@ -11,6 +11,7 @@ namespace :db do
     Mongoid.purge!
     beginning_time = Time.now
 
+    @user = make_user
     make_projects
         
     end_time = Time.now
@@ -25,6 +26,12 @@ def debug message
   Rails.logger.info message
 end
 
+def make_user
+  User.create! :name => "danpersa",
+               :uid => "579158",
+               :provider => "github"
+end
+
 def make_projects
   debug "maje_projects"
   3.times do |n|
@@ -35,6 +42,7 @@ def make_projects
                               :user_story_seq => 1
     make_iterations_with_user_stories project
   end
+  @user.join Project.all.first
 end
 
 def make_iterations_with_user_stories project

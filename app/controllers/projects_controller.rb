@@ -1,8 +1,10 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate
+  
   respond_to :json, :html
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects
     respond_with @projects, :handler => [:rabl]
   end
 
@@ -40,4 +42,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def set_as_current
+    session[:current_project_id] = params[:project_id]
+    respond_to do |format|
+      format.json { render json: nil, status: :ok }
+    end
+  end
 end

@@ -7,5 +7,6 @@ class Project
   field :user_story_seq, :type => Integer
 
   has_many :iterations
+  has_and_belongs_to_many    :users
 
 end

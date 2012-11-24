@@ -1,0 +1,10 @@
+<tr>
+  <td>{{userStory.id}}</td>
+  <td class="data">
+      {{userStory.summary}}
+  </td>
+  <td>
+    <a {{action editUserStory userStory}} href="#">Edit</a>
+    <a {{action destroyUserStory userStory}} href="#">Delete</a>
+  </td>
+</tr>

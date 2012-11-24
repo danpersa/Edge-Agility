@@ -1,0 +1,20 @@
+
+<ul id="iterations" class="ui-sortable">
+{{#each iteration in content}}
+  <li class="iteration ui-state-default ui-state-disabled" data-id="{{unbound iteration.id}}" type="iteration">
+    {{iteration.name}}
+  </li>
+  {{#each userStory in iteration.sortedUserStories}}
+  <li class="user-story ui-state-default" data-id="{{unbound userStory.id}}" type="user-story">
+    <div class="row">
+    <div class="one columns">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+    </div>
+    <div class="eleven columns">{{userStory.summary}}({{userStory.order}})</div>
+  </li>  
+  {{/each}}  
+{{/each}}
+</ul>
+<div class="span9">
+  {{outlet}}
+</div>

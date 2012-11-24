@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Summary</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="user-stories">
+  {{#each userStory in content}}
+    {{view EdgeAgility.ShowUserStoryView userStoryBinding="userStory"}}
+  {{/each}}
+  {{#if isNewVisible}}
+    <tr>
+      <td>*</td>
+      <td>
+        
+      </td>
+    </tr>
+  {{/if}}
+  </tbody>
+</table>
+<a class="btn" {{action showNewUserStory}}><i class="icon-plus-sign"></i> Add User Story</a>
+<div class="span9">
+  {{outlet}}
+</div>

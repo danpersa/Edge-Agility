@@ -1,0 +1,16 @@
+{{#with content}}
+  <fieldset>
+      <legend>Create User Story</legend>
+      <div class="row collapse">
+        <div class="two columns"><label class="inline">Summary</label></div>
+        <div class="ten columns">{{view Ember.TextField valueBinding="summary" id="summary" placeholder="Summary" required="true"}}</div>
+      </div>
+
+      <label>Details</label>
+      {{view Ember.TextArea valueBinding="details" id="details" placeholder="Details"}}
+  </fieldset>
+  <div class="row collapse">
+    {{submitButton "Create"}}
+    <a class="secondary button" {{action cancelNew}}>Cancel</a>
+  </div>
+{{/with}}

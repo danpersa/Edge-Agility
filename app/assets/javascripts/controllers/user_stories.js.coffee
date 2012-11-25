@@ -47,6 +47,8 @@ EdgeAgility.EditUserStoryController = Ember.Controller.extend({
   updateRecord: ->
     # TODO - validations
 
+    userStory = EdgeAgility.store.find(EdgeAgility.UserStory, this.get('content').get('id'))
+
     # commit and then clear the transaction (so exitEditing doesn't attempt a rollback)
     this.transaction.commit()
     this.transaction = null
@@ -54,7 +56,7 @@ EdgeAgility.EditUserStoryController = Ember.Controller.extend({
     this.showRecord();
 
   showRecord: ->
-    EdgeAgility.router.transitionTo('userStories.index', this.get('content'));
+    EdgeAgility.router.transitionTo('backlog.index', {});
 
 })
 

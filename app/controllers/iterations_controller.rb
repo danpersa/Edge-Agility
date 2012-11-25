@@ -4,7 +4,11 @@ class IterationsController < ApplicationController
   respond_to :json, :html
 
   def index
-    @iterations = Iteration.all
+    if (params[:project_id].nil?)
+      @iterations = Iteration.all
+    else
+      @iterations = Project.where(_id: params[:project_id]).first.iterations
+    end
     respond_with @iterations, :handler => [:rabl]
   end
 
@@ -40,5 +44,14 @@ class IterationsController < ApplicationController
     respond_to do |format|
       format.json { render json: nil, status: :ok }
     end
+  end
+
+  def backlog_iteration
+    Project.find(params[:project_id]).iterations.each do |iteration|
+      if (iteration.name == 'Backlog')
+        @iteration = iteration
+      end  
+    end
+    respond_with @iteration, :handler => [:rabl]
   end
 end

@@ -5,6 +5,7 @@ EdgeAgility.Iteration = DS.Model.extend(
   start_date: DS.attr("date")
   end_date: DS.attr("date")
   user_stories: DS.hasMany('EdgeAgility.UserStory', { embedded: true })
+  project: DS.belongsTo('EdgeAgility.Project')
 
   validate: ->
     if @get("name") is `undefined` or @get("name") is ""

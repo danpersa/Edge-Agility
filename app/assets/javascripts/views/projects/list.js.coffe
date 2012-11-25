@@ -1,3 +1,4 @@
 EdgeAgility.ProjectsView = Ember.View.extend({
-  templateName:    'projects/list'
+  templateName:    'projects/list',
+  logged: true
 });

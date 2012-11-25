@@ -15,6 +15,8 @@ EdgeAgility::Application.routes.draw do
   resources :prototypes
   resources :users, only: [:index, :show]
 
+  match '/backlog_iteration/:project_id', to: 'iterations#backlog_iteration'
+
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')

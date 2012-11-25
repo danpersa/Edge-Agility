@@ -13,9 +13,16 @@ EdgeAgility.NewIterationController = Ember.Controller.extend({
       EdgeAgility.displayError validationErrors
     else
       # commit and then clear the transaction (so exitEditing doesn't attempt a rollback)
+      selectedProject = EdgeAgility.router.get('projectsMenuController').get('selectedProject')
+      this.get('content').set('project', selectedProject)
       this.transaction.commit();
       this.transaction = null;
-      this.get('content').addObserver('id', this, 'showRecord')
+
+      backlogController = EdgeAgility.router.get('backlogController')
+      backlogController.set 'content', null
+      EdgeAgility.router.transitionTo('backlog.index', {})
+      #this.get('content').addObserver('id', this, 'showRecord')
   showRecord: ->
     EdgeAgility.router.transitionTo('backlog.index', this.get('content'))
+
 }) 

@@ -1,26 +1,41 @@
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Action</th>
-    </tr>
-  </thead>
+
+<table class="twelve">
+
+   {{#if content}}
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+   {{else}}  
+   
+    {{/if}}  
+
   <tbody id="projects">
-  {{#each project in content}}
-    <tr>
-      <td>
-          {{project.code}}
-      </td>
-      <td>
-          {{project.name}}
-      </td>
-      <td>
-        <a {{action showEditProject project}} href="#">Edit</a>
-        <a {{action destroyProject project}} href="#">Delete</a>
-      </td>
-    </tr>
-  {{/each}}
+
+  {{#if content}}
+    <h3 class="subheader">Project Dashboard</h3>     
+    {{#each project in content}}      
+        <tr>
+          <td>            
+              {{project.code}}
+          </td>
+          <td>               
+              {{project.name}}
+          </td>
+          <td>
+            <a {{action selectProject project}} href="#">Select</a>
+            <a {{action showEditProject project}} href="#">Edit</a>
+            <a {{action destroyProject project}} href="#">Delete</a>
+          </td>
+        </tr>      
+    {{/each}}     
+  {{else}}    
+     <h3 class="subheader">Welcome to Edge Agility! You should first start by creating a project.</h3>    
+  {{/if}}
   </tbody>
 </table>
+<a class="secondary button" {{action showNewProject}}>New Project</a>
 {{outlet}}

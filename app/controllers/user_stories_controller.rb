@@ -4,7 +4,15 @@ class UserStoriesController < ApplicationController
   respond_to :json, :html
 
   def index
-    @user_stories = current_project.user_stories
+    if (params[:iteration_id].nil?)
+      @user_stories = current_project.user_stories
+    else
+      if (params[:status].nil?)
+        @user_stories = UserStory.where(:iteration_id => params[:iteration_id])
+      else
+        @user_stories = UserStory.where(:iteration_id => params[:iteration_id], :status => params[:status].to_i)
+      end
+    end
     respond_with @user_stories, :handler => [:rabl]
   end
 
@@ -14,6 +22,8 @@ class UserStoriesController < ApplicationController
 
   def create
     @user_story = UserStory.new(params[:user_story])
+    @user_story.status = 0
+    @user_story.points = 0
     respond_to do |format|
       if @user_story.save
         format.json { respond_with @user_story, :responder => AppResponder }

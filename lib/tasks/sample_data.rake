@@ -47,7 +47,7 @@ end
 
 def make_iterations_with_user_stories project
   debug "make iterations: "
-  3.times do |n|
+  2.times do |n|
     print "."
     iteration = Iteration.create! :name => "Iteration #{n + 1}",
                       :start_date => Date.new,
@@ -55,6 +55,11 @@ def make_iterations_with_user_stories project
                       :project_id => project.id
     make_user_stories iteration
   end
+  iteration = Iteration.create! :name => "Backlog",
+                      :start_date => Date.new,
+                      :end_date => Date.new,
+                      :project_id => project.id
+  make_user_stories iteration
 end
 
 def make_user_stories iteration
@@ -64,10 +69,10 @@ def make_user_stories iteration
     user_story = UserStory.create! :summary => "User does #{n + 1} push-ups",
                       :details => "As an User I want to do #{n + 1} push-ups " +
                                   "so I can have more muscles",
-                      :points => n,
+                      :points => n + 1,
                       :code => "US-#{iteration.project.code}-#{n+1}",
                       :order => 3 - n,
-                      :status => 0,                      
+                      :status => n,                      
                       :iteration_id => iteration.id
     make_technical_stories user_story
     make_scenarios user_story

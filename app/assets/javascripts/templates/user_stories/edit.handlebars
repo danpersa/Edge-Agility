@@ -6,6 +6,16 @@
         <div class="ten columns">{{view Ember.TextField valueBinding="summary" id="summary" placeholder="Summary" required="true"}}</div>
       </div>
 
+      <div class="row collapse">
+        <div class="two columns"><label class="inline">Story Points</label></div>
+        <div class="ten columns">{{view Ember.TextField valueBinding="points" id="points" placeholder="Story Points" required="true"}}</div>
+      </div>
+
+      <div class="row collapse">
+        <div class="two columns"><label class="inline">Assigned to</label></div>
+        <div class="ten columns"><input type="text"></div>
+      </div>
+
       <label>Details</label>
       {{view Ember.TextArea valueBinding="details" id="details" placeholder="Details"}}
   </fieldset>

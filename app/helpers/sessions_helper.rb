@@ -11,7 +11,8 @@ module SessionsHelper
 
   def current_project
     current_project_id = session[:current_project_id]
-    @current_project ||= Project.where(:id => current_project_id).first
+
+    @current_project ||= Project.where(:_id => current_project_id).first
     if @current_project.nil?
       return nil
     end

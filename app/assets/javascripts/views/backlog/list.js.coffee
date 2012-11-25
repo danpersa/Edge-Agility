@@ -2,8 +2,8 @@ EdgeAgility.BacklogView = Ember.View.extend({
   templateName:    'backlog/list'
   iterationsBinding: 'EdgeAgility.BacklogController'
   
-  refreshListing: ->
-    EdgeAgility.backlogController.findAll()
+ # refreshListing: ->
+ #   EdgeAgility.backlogController.findAll()
 
   didInsertElement: ->
     @_super()
@@ -27,10 +27,9 @@ EdgeAgility.BacklogView = Ember.View.extend({
             userStory.set 'order', order
             userStory.set 'iteration', iteration
             order += 1
+    #@$('#iterations').disableSelection()
 
         EdgeAgility.store.commit()
-          
-
 })
 
 EdgeAgility.NewIterationButtonView = Ember.View.extend({

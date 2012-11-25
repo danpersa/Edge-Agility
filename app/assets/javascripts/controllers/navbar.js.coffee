@@ -1,5 +1,10 @@
 EdgeAgility.LoginMenuController = Ember.Controller.extend({
   content: null
+  logged:( ->
+    if (this.get('content') != null)
+      return true
+    return false
+  ).property('content')
 
   enter: ->
     $.get('/current_user', (data) ->
@@ -10,8 +15,8 @@ EdgeAgility.LoginMenuController = Ember.Controller.extend({
 
 EdgeAgility.ProjectsMenuController = Ember.ArrayController.extend({
   selectedProject: null
-
   resourceType: EdgeAgility.Project
+
   findAll: ->
     @set 'content', EdgeAgility.store.findAll(EdgeAgility.Project)
 

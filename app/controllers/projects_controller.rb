@@ -16,6 +16,11 @@ class ProjectsController < ApplicationController
     @project = Project.new(params[:project])
     respond_to do |format|
       if @project.save
+        current_user.join @project
+        iteration = Iteration.create! :name => "Backlog",
+                      :start_date => Date.new,
+                      :end_date => Date.new,
+                      :project_id => @project.id
         format.json { respond_with @project, :responder => AppResponder }
       else
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -43,7 +48,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_as_current
-    session[:current_project_id] = params[:project_id]
+    session[:current_project_id] = params[:id]
     respond_to do |format|
       format.json { render json: nil, status: :ok }
     end

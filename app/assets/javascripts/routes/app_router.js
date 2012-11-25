@@ -6,12 +6,14 @@ EdgeAgility.Router = Ember.Router.extend({
     index: Ember.Route.extend({
       route: '/',
       selectProject: function(router, event) {
-        $.get('/projects/' + event.context.get('id') + '/set_as_current', function(data) {
-          EdgeAgility.router.get('projectsMenuController').selectProject(event.context.get('id'));
-        });
+        EdgeAgility.router.get('projectsMenuController').selectProject(event.context.get('id'));
+        EdgeAgility.router.transitionTo('backlog.index');
       },
       showEditProject: function(router, event) {
         router.transitionTo('projects.edit', event.context);
+      },
+      showNewProject: function(router) {
+        router.transitionTo('projects.new', {});
       },
       // You'll likely want to connect a view here.
       connectOutlets: function(router) {
@@ -55,22 +57,48 @@ EdgeAgility.Router = Ember.Router.extend({
           controller: router.get('projectsMenuController')
         });
       }
-
       // Layout your routes here...
     }),
+    scrumBoard:
+    Ember.Route.extend({
+      route: '/scrum_board',
+      showBacklog: function(router) {
+        router.transitionTo('backlog.index', {});
+      },
+      enter: function (router) {
+        console.log("The scrumbBoard sub-state was entered.");
+      },
+      connectOutlets: function(router, context) {
+        router.get('applicationController').connectOutlet({
+          viewClass: EdgeAgility.ScrumBoardView,
+          controller: router.get('scrumBoardController')
+        });
+        router.get('scrumBoardController').findAll()
+      }
+    }), 
     backlog:  Ember.Route.extend({
       route: '/backlog',
       enter: function (router) {
         console.log("The backlog sub-state was entered.");
+        var backlogController = EdgeAgility.router.get('backlogController')
+        backlogController.findAll();
       },
       showNewIteration: function(router) {
         router.transitionTo('backlog.newIteration', {});
       },
+      showScrumBoard: function(router) {
+        router.transitionTo('scrumBoard', {});
+      },
+      selectCurrentIteration: function(router, event) {
+        router.get('backlogController').selectIteration(event.context.get('id'))
+      },
+      editUserStory: function(router, event) {
+        router.transitionTo('userStories.edit', event.context);
+      },
       connectOutlets: function(router, context) {
         router.get('applicationController').connectOutlet({
           viewClass: EdgeAgility.BacklogView,
-          controller: router.get('backlogController'),
-          context: EdgeAgility.store.findAll(EdgeAgility.Iteration)
+          controller: router.get('backlogController')
         });
       },
       index: Ember.Route.extend({
@@ -94,7 +122,7 @@ EdgeAgility.Router = Ember.Router.extend({
         },
         connectOutlets: function(router, context) {
           router.get('backlogController').connectOutlet({
-            outletName: 'newIteration',
+            outletName: 'quickBar',
             viewClass: EdgeAgility.NewIterationView,
             controller: router.get('newIterationController')
           });
@@ -117,6 +145,16 @@ EdgeAgility.Router = Ember.Router.extend({
         exit: function(router) {
           router.get('editProjectController').exitEdit();
         }
+      }),
+      new: Ember.Route.extend({
+          route: '/new',
+          cancelNew: function(router) {
+            router.transitionTo('root.index');
+          },
+          connectOutlets: function(router, context) {
+            router.get('projectsMenuController').connectOutlet('newProject');
+            router.get('newProjectController').enterNew();
+          }
       })
     }),
     userStories:  Ember.Route.extend({
@@ -136,7 +174,7 @@ EdgeAgility.Router = Ember.Router.extend({
         console.log("The user_stories sub-state was entered.");
       },
       connectOutlets: function(router, context) {
-        router.get('applicationController').connectOutlet("userStories", EdgeAgility.store.findAll(EdgeAgility.UserStory));
+        //router.get('applicationController').connectOutlet("userStories", EdgeAgility.store.findAll(EdgeAgility.UserStory));
       },
       index: Ember.Route.extend({
           route: '/',
@@ -159,11 +197,10 @@ EdgeAgility.Router = Ember.Router.extend({
             
           },
           cancelEdit: function(router) {
-            router.transitionTo('userStories.index');
+            router.transitionTo('backlog.index');
           },
           connectOutlets: function(router, context) {
-            var userStoriesController = router.get('userStoriesController');
-            userStoriesController.connectOutlet('editUserStory', context);
+            router.get('applicationController').connectOutlet('editUserStory', context);
             router.get('editUserStoryController').enterEdit();       
           },
           exit: function(router) {

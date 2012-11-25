@@ -4,6 +4,7 @@ EdgeAgility.UserStory = DS.Model.extend(
   summary: DS.attr("string")
   details: DS.attr("string")
   order: DS.attr("number")
+  points: DS.attr("number")
   iteration: DS.belongsTo('EdgeAgility.Iteration')
 
   validate: ->

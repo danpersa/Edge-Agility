@@ -9,5 +9,5 @@ EdgeAgility.store = DS.Store.create({
       "user_story": "user_stories"
     }
   )
-  revision: 4
+  revision: 9
 });

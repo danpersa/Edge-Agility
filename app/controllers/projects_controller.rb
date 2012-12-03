@@ -21,10 +21,8 @@ class ProjectsController < ApplicationController
                       :start_date => Date.new,
                       :end_date => Date.new,
                       :project_id => @project.id
-        format.json { respond_with @project, :responder => AppResponder }
-      else
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
+      format.json { respond_with @project, :responder => AppResponder }
     end
   end
 

@@ -1,5 +1,7 @@
 EdgeAgility::Application.routes.draw do
   root :to => 'sample#index'
+  match '/#dashboard',                  :to => 'sample#index',
+                                        :as => :dashboard
   match '/signup',                      :to => 'sample#index'
   match '/forms',                       :to => 'sample#forms'
 

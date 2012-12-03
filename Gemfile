@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
 gem 'mongoid'
-gem 'ember-rails'
+gem 'ember-rails', :git => 'https://github.com/danpersa/ember-rails.git'
 gem 'rabl'
 
 gem 'compass-rails'

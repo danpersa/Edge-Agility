@@ -1,6 +1,4 @@
 EdgeAgility.Iteration = DS.Model.extend(
-  primaryKey: 'id'
-  id: DS.attr("string")
   name: DS.attr("string")
   start_date: DS.attr("date")
   end_date: DS.attr("date")

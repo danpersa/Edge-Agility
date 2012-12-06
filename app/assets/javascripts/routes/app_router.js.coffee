@@ -155,8 +155,6 @@ EdgeAgility.Router = Ember.Router.extend(
       )
       show: Ember.Route.extend(
         route: "/:id"
-        enter: (router) ->
-          console.log "Entering project show"
 
         serialize: (router, context) ->
           return {
@@ -167,11 +165,15 @@ EdgeAgility.Router = Ember.Router.extend(
           console.log "Deserialize project with id: " + context.id
           return EdgeAgility.store.find(EdgeAgility.Project, context.id)
 
+        enter: (router) ->
+          console.log "Entering project show"
+
         cancelEdit: (router) ->
           router.transitionTo "root.index.backlog.index"
 
         connectOutlets: (router, project) ->
           router.get("applicationController").connectOutlet "project", project
+          router.get('projectController').enter()
           
         exit: (router) ->
           

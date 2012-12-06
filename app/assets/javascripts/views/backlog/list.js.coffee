@@ -1,6 +1,6 @@
 EdgeAgility.BacklogView = Ember.View.extend({
   templateName:    'backlog/list'
-  iterationsBinding: 'EdgeAgility.BacklogController'
+  #iterationsBinding: 'EdgeAgility.BacklogController'
   
  # refreshListing: ->
  #   EdgeAgility.backlogController.findAll()

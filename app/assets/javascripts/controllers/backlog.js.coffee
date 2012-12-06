@@ -1,7 +1,7 @@
 EdgeAgility.BacklogController = Ember.ArrayController.extend({
   selectedIteration: null
 
-  resourceType: EdgeAgility.Iteration
+  # resourceType: EdgeAgility.Iteration
   findAll: ->
     selectedProject = EdgeAgility.router.get('projectsMenuController').get('selectedProject')
     iterations = EdgeAgility.store.findQuery(EdgeAgility.Iteration, {"project_id": selectedProject.get('id')})

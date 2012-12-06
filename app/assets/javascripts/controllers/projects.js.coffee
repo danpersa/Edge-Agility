@@ -45,5 +45,9 @@ EdgeAgility.NewProjectController = Ember.Controller.extend({
 
 EdgeAgility.ProjectController = Ember.Controller.extend({
   content: null
+  iterations: null
+
+  enter: ->
+    @set 'iterations', EdgeAgility.store.findQuery(EdgeAgility.Iteration, {"project_id": this.get('content').get('id')})
   
 })

@@ -1,6 +1,7 @@
 EdgeAgility.ProjectView = Ember.View.extend({
   templateName: 'projects/show'
   projectBinding: 'EdgeAgility.projectController.content'
+  iterationsBinding: 'EdgeAgility.projectController.iterations'
 
   didInsertElement: ->
     @_super()

@@ -25,4 +25,5 @@ EdgeAgility.NewIterationController = Ember.Controller.extend({
   showRecord: ->
     EdgeAgility.router.transitionTo('backlog.index', this.get('content'))
 
-}) 
+})
+

@@ -42,3 +42,8 @@ EdgeAgility.NewProjectController = Ember.Controller.extend({
   showRecord: ->
     EdgeAgility.router.transitionTo('root.index', this.get('content'))
 })
+
+EdgeAgility.ProjectController = Ember.Controller.extend({
+  content: null
+  
+})

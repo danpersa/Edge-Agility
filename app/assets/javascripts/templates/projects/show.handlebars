@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="three columns">
+    <h3 class="subheader">Project</h3>
+    <h2>{{content.name}}<h2>
+  </div>
+</div>
+
+<ul id="iterations" class="ui-sortable">
+{{#each iteration in content.iterations}}
+  <li class="iteration ui-state-default ui-state-disabled" data-id="{{unbound iteration.id}}" type="iteration">
+    <div class="row">
+      <div class="ten columns">
+        {{iteration.name}}
+      </div>
+      <div class="two columns">
+        <a {{action selectCurrentIteration iteration}} href="#">Set As Current</a>
+      </div>
+    </div>
+  </li>
+
+  {{#each userStory in iteration.sortedUserStories}}
+  <li class="user-story ui-state-default" data-id="{{unbound userStory.id}}" type="user-story">
+    <div class="row">
+    <div class="one columns">
+      <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+    </div>
+    <div class="nine columns"><strong>{{userStory.summary}}</strong>({{userStory.points}} points)</div>
+    <div class="two columns">
+      <a {{action editUserStory userStory}} href="#">Edit</a>
+      <a {{action destroyUserStory userStory}} href="#">Delete</a>
+    </div>
+  </li>  
+  {{/each}}  
+{{/each}}
+</ul>

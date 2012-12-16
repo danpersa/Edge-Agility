@@ -48,6 +48,8 @@ EdgeAgility.ProjectController = Ember.Controller.extend({
   iterations: null
 
   enter: ->
-    @set 'iterations', EdgeAgility.store.findQuery(EdgeAgility.Iteration, {"project_id": this.get('content').get('id')})
+    iterations = EdgeAgility.store.findQuery(EdgeAgility.Iteration, {"project_id": this.get('content').get('id')})
+    @set 'iterations', iterations
+    console.log "aa"
   
 })
